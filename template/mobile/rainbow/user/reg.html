@@ -1,0 +1,179 @@
+<include file="public/header" title="注册" body=""/>
+<include file="public/header_nav" title="注册" href="javascript:history.back(-1)"/>
+<style>
+    #verify_code_img {
+        padding: .55467rem .21333rem;
+        width: 4.6rem;
+        height: 2.9rem;
+        color: white;
+        border-radius: .128rem;
+    }
+
+    .lsu {
+        height: 2.5rem !important;
+    }
+
+    .c-form-txt-normal {
+        margin-top: 0.3rem
+    }
+
+    .v-code-input {
+        margin-top: 0.3rem
+    }
+
+    .ico-telephone {
+        background-image: url("__STATIC__/images/system/username.png");
+        background-size: 100% 100%;
+    }
+
+    .ico-password {
+        background-image: url("__STATIC__/images/system/password.png");
+        background-size: 100% 100%;
+    }
+    .ico-v-code{
+        background-image: url("__STATIC__/images/system/code.png");
+        background-size: 100% 100%;
+    }
+    .ico-referee{
+        background-image: url("__STATIC__/images/system/referee.png");
+        background-size: 100% 100%;
+    }
+    .btn-text-message {
+        color: #FFB763 !important;
+        border: 1px solid #FFB763 !important;
+        height: 1.2rem !important;
+        line-height: 1.2rem !important;
+        border-radius: .3rem !important;
+    }
+    .mybuttom {
+        border: 0rem solid;
+        text-align: center;
+
+        border-radius: 0.2rem;
+        margin: 1.5rem 15% 0 15%;
+        font-size: 0.6rem;
+        font-weight: bold;
+        color: #ffffff;
+        padding: 0.6rem;
+        width: 70%;
+        background-image: linear-gradient(to right, #FFB763, #FFC66D);
+    }
+    .signup-find{
+        margin-top: 0.5rem;
+        color: #999999;
+    }
+</style>
+
+<!--注册表单-s-->
+<div class="loginsingup-input" style="width: 100%;padding: 0;">
+    <form action="" method="post" id="regFrom">
+        <input type="hidden" name="auth_code" value="{$Think.config.AUTH_CODE}"/>
+        <input type="hidden" name="is_bind" value="{$Request.param.is_bind}">
+        <div class="lsu">
+            <span class="ico ico-telephone"></span>
+            <p style="line-height: 0.9rem;margin-left: 1.3rem">手机号</p>
+            <input style="width: 100%;" type="text" name="username" id="username" value="" placeholder="请输入手机号"
+                   class="c-form-txt-normal">
+            <span id="mobile_phone_notice"></span>
+        </div>
+        <if condition="$regis_sms_enable eq 1">
+        <div class="lsu">
+            <span class="ico ico-v-code"></span>
+            <p style="line-height: 0.9rem;margin-left: 1.3rem">验证码</p>
+            <input class="v-code-input" type="text" id="mobile_code" value="" name="mobile_code" placeholder="请输入验证码">
+            <a class="btn-text-message" rel="mobile" onClick="sendcode(this)">获取验证码</a>
+        </div>
+        </if>
+        <div class="lsu">
+            <span class="ico ico-password"></span>
+            <p style="line-height: 0.9rem;margin-left: 1.3rem">密码</p>
+            <input type="password" id="password" value="" maxlength="16" placeholder="请设置6-16位登录密码"
+                   class="c-form-txt-normal" onBlur="check_password();">
+            <input type="hidden" name="password" value=""/>
+            <span id="password_notice"></span>
+        </div>
+        <div class="lsu">
+            <span class="ico ico-password"></span>
+            <p style="line-height: 0.9rem;margin-left: 1.3rem">确认密码</p>
+            <input type="password" id="password2" value="" maxlength="16" placeholder="确认密码" style="margin-top: 0.3rem">
+            <input type="hidden" name="password2" value=""/>
+            <span id="confirm_password_notice"></span>
+        </div>
+        <!--<div class="lsu boo zc_se">-->
+        <!--<input type="text"  value="" name="verify_code" placeholder="请输入验证码" >-->
+        <!--<img src="/index.php?m=Home&c=User&a=verify" id="verify_code_img" onclick="verify()">-->
+        <!--</div>-->
+        <if condition="$tpshop_config['integral_invite'] eq 1">
+            <div class="lsu">
+                <span class="ico ico-referee"></span>
+                <p style="line-height: 0.9rem;margin-left: 1.3rem">邀请码</p>
+                <input type="text" name="invite" id="invite" value="" placeholder="推荐人手机号(选填)"
+                       class="c-form-txt-normal">
+                <span id="invite_phone_notice"></span>
+            </div>
+        </if>
+        <div class="signup-find">
+
+            <p class="recept" style="margin-left: 0.6rem">温馨提示： 推荐码需要联系官方获取噢~</p>
+            <!--<p class="recept">注册即视为同意<a href="javascript:show_agreement();">《开源用户注册协议》</a></p>-->
+        </div>
+
+        <input class="mybuttom" type="button" name="" id="" onclick="checkSubmit()" value="注 册"/>
+
+
+    </form>
+</div>
+<script>
+    //获取验证码
+    function sendcode(o){
+        var type = $(o).attr('type');
+        var send = $("#validate_type_"+type).attr("val");
+        $.ajax({
+            url:'/index.php?m=Home&c=Api&a=send_validate_code&t='+Math.random(),
+            type:'post',
+            dataType:'json',
+            data:{type:type,send:send,scene:1},
+            success:function(res){
+                if(res.status==1){
+                    countdown(o);
+                    showErrorMsg(res.msg);
+                }else{
+                    showErrorMsg(res.msg);
+                }
+            }
+        })
+    }
+
+    //倒计时
+    function countdown(obj){
+        var obj = $(obj);
+        var s = {$tpshop_config['sms_sms_time_out']|default=60};
+        //添加样式
+        obj.attr('id','fetchcode');
+        //改变按钮状态
+        obj.unbind("click");
+        callback();
+        //循环定时器
+        var T = window.setInterval(callback,1000);
+        function callback()
+        {
+            if(s <= 1){
+                //移除定时器
+                window.clearInterval(T);
+                obj.text('获取验证码');
+                obj.bind("click", countdown)
+                $(obj).removeAttr('id','fetchcode');
+            }else{
+                if(s<=10){
+                    obj.text( '0'+ --s + '秒后再获取');
+                }else{
+                    obj.text( --s + '秒后再获取');
+                }
+            }
+        }
+    }
+</script>
+
+
+</body>
+</html>

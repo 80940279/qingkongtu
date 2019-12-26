@@ -1,0 +1,47 @@
+<div class="flool up-tpnavf-wrap tpnavf [top-header]">
+    <div class="footer up-tpnavf-head">
+        <ul>
+            <li>
+                <a href="{:U('Mobile/Goods/goodsList',array())}"><div class="Collapsing"><span>全部商品</span></div></a>
+            </li>
+            <foreach name="goods_category_tree" item="vo" key="k">
+                <if condition="$vo[parent_id] eq 0">
+                    <li>
+                        <div class="Collapsing"><span>{$vo['cat_name']|getSubstr=0,12}</span><img src="/template/mobile/rainbow/static/img/main-icon02.png" alt=""></div>
+                        <div class="coll_body">
+                            <foreach name="vo.tmenu" item="tm" key="tk">
+                                <a href="{:U('Mobile/Goods/goodsList',array('id'=>$tm[cat_id]))}">{$tm.cat_name}</a>
+                            </foreach>  
+                        </div>
+                    </li>
+                </if>
+            </foreach>
+        </ul>
+    </div>
+</div>
+<style>
+.coll_body{display: none; }
+.coll_body a{display:block; margin:10px; padding-left: 1rem;
+ }
+</style>
+<script type="text/javascript">
+$(function(){	
+	$(window).scroll(function() {		
+		if($(window).scrollTop() >= 1){ 
+			$('.tpnavf').hide()
+		}
+	})
+    $(".Collapsing").click(function(){
+        $(".yello").removeClass("yello");
+        $(this).toggleClass("yello").siblings('.Collapsing').removeClass("yello");//切换图标
+        $(this).next(".coll_body").slideToggle(300).parent().siblings().find(".coll_body").slideUp(300);
+        //$(this).next(".coll_body").slideToggle(300).siblings(".coll_body").slideUp(300);
+    });
+
+	$(".footer ul li a").click(function () {
+        //$(this).addClass('yello').parent().siblings().find('a').removeClass('yello')
+        $(this).addClass('yellos').siblings('a').removeClass('yellos');
+        $('.tpnavf').hide();
+	});
+})
+</script>

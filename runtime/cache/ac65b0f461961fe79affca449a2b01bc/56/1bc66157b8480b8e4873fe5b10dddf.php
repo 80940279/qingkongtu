@@ -1,0 +1,4 @@
+<?php
+//000000000000
+ exit();?>
+[{"img_id":20,"goods_id":5,"image_url":"\/public\/upload\/goods\/2018\/04-09\/2444f6f4aeb6f6c7e96609cd0ab7efb2.png"},{"img_id":21,"goods_id":5,"image_url":"\/public\/upload\/goods\/2018\/04-09\/e315b5f11af65c73e32b25f6638f76fc.png"},{"img_id":22,"goods_id":5,"image_url":"\/public\/upload\/goods\/2018\/04-09\/0924f5ef5e4565cd79a6886a25568346.png"},{"img_id":793,"goods_id":5,"image_url":"\/public\/upload\/goods\/2018\/04-17\/5766e3578552ae123da53a653bc6dae2.png"},{"img_id":858,"goods_id":79,"image_url":"\/public\/upload\/goods\/2018\/04-17\/224ba3b41fa7f67f7861581748854b0c.png"},{"img_id":859,"goods_id":79,"image_url":"\/public\/upload\/goods\/2018\/04-17\/712e9a715093fd02c1cc25b662dc5f86.png"},{"img_id":860,"goods_id":79,"image_url":"\/public\/upload\/goods\/2018\/04-17\/496954b32280cdd204ea3abcac8e7fa3.png"},{"img_id":861,"goods_id":79,"image_url":"\/public\/upload\/goods\/2018\/04-17\/c8e9a3603620aacb5802d61a219af8e3.png"}]

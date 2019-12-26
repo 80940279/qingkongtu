@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>首页-{$tpshop_config['shop_info_store_title']}</title>
+    <link rel="stylesheet" href="__STATIC__/css/style.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/iconfont.css"/>
+    <script src="__STATIC__/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <!--<script src="__STATIC__/js/zepto-1.2.0-min.js" type="text/javascript" charset="utf-8"></script>-->
+    <script src="__STATIC__/js/mobile-util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__STATIC__/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__PUBLIC__/js/global.js"></script>
+    <script src="__STATIC__/js/layer.js" type="text/javascript"></script>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="{$tpshop_config.shop_info_store_ico|default='/public/static/images/logo/storeico_default.png'}"
+          media="screen"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/personal.css"/>
+</head>
+<style>
+    .content {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .g4 {
+        background-color: #eef0f3;
+    }
+
+    .jz-loods {
+        height: 2.2rem;
+        line-height: 2.2rem;
+        background-color: #eef0f3;
+    }
+
+    .h-showcase {
+        border-top: 0.213rem solid #eef0f3;
+    }
+
+    .f-recommend li:last-child {
+        margin-bottom: 0.213rem;
+    }
+
+    body {
+        background-color: #eef0f3;
+    }
+
+    .c-line {
+        width: 100%;
+        background-color: red;
+        text-align: center;
+        font-size: 0.52rem;
+        background: url(__STATIC__/images/c-line.png) no-repeat 100% 100%;
+        background-position-y: 0.15rem;
+        background-position-x: 0.545rem;
+        background-size: 14.72rem;
+        color: #999999;
+        display: none;
+        margin-top: 1rem;
+    }
+
+    .floor {
+        background-color: #ffffff;
+    }
+
+    .fr-pdetail {
+        padding-top: 0.4rem !important;
+    }
+
+    .frp-price {
+        font-weight: 800;
+    }
+
+    .mslide li img {
+        height: 7.254rem;
+    }
+
+    .mybutton {
+        border: 0rem solid;
+        text-align: center;
+        display: inline-block;
+        border-radius: 0.2rem;
+        margin: 0.5rem 0 0;
+        font-size: 0.6rem;
+        font-weight: bold;
+        padding: 0.6rem;
+        color:#ffffff;
+        width: 100%;
+        background-image: linear-gradient(to right, #FFB763, #FFC66D);
+    }
+
+    nav a img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    nav a span {
+        color: #666666;
+    }
+
+    .goods-parameter {
+        display: flex;
+        width: 100%;
+        overflow: auto;
+        background: #ffffff;
+    }
+
+    .merit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 12rem;
+        height: 100%;
+        padding: 0.05rem 0 0 0.5rem;
+    }
+
+    .tip {
+        width: 0.2rem;
+        height: 60%;
+        border-radius: 3rem;
+        background-image: linear-gradient(to right, #ffb763, #ffc66d);
+        float: left;
+        margin-top: 2%;
+        margin-left: 0.64rem;
+    }
+
+    .goods-parameter::-webkit-scrollbar {
+        /* 隐藏滚动条, 这种方式不兼容 火狐 和 IE */
+        display: none;
+    }
+
+    .goods {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+    }
+
+    .goods-list {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    .goods-details {
+        display: flex;
+        justify-content: space-between;
+
+        width: 100%;
+        height: 5rem;
+        padding: 0.2rem 0.6rem;
+        border-bottom: 0.1rem solid #eee;
+    }
+
+    .goods-details img {
+
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .goods-info {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    .goods-info h3 {
+        width: 10.3rem;
+        height: 1.6rem;
+        font-size: 0.8rem;
+        color: #000;
+        word-wrap: break-word;
+        word-break: break-all;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+    }
+
+    .goods-info p {
+        width: 10.55rem;
+        font-size: 0.5rem;
+        color: #666;
+        margin-top: 0.1rem;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .goods-info span {
+        display: inline-block;
+        border: 0.03rem #ffc155 solid;
+        border-radius: 0.2rem;
+        color: #ffc155;
+        font-size: 0.5rem;
+        padding: 0.1rem 0.3rem 0.1rem 0.2rem;
+        margin-top: 0.3rem;
+
+    }
+
+    .goods-info div {
+        position: absolute;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 50%;
+
+        right: 0.1rem;
+        bottom: 0.01rem;
+    }
+
+    .goods-list::-webkit-scrollbar {
+        /* 隐藏滚动条, 这种方式不兼容 火狐 和 IE */
+        display: none;
+    }
+</style>
+<body style="background: #ffffff">
+<!--顶部搜索栏-s-->
+<div class="classreturn">
+    <div class="content">
+        <div class="ds-in-bl search center">
+            <span>晴空兔</span>
+        </div>
+    </div>
+</div>
+<!--顶部搜索栏-e-->
+
+<!--顶部滚动广告栏-s-->
+<!--    <div class="banner ban1">-->
+<!--        <div class="mslide" id="slideTpshop">-->
+<!--            <ul>-->
+<!--                &lt;!&ndash;广告表&ndash;&gt;-->
+<!--                <adv pid ="9" limit="5" item="v">-->
+<!--                    <li><a href="{$v.ad_link}{$edit_ad ? '&suggestion=750*300' : ''}">-->
+<!--                        <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}" alt="">-->
+<!--                    </a></li>-->
+<!--                </adv>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--顶部滚动广告栏-e-->
+<!--    -->
+
+<div class="z_user_head">
+    <div class="z_user_top">
+        <div class="user_top_tx">
+            <img src="{$user.head_pic == ''? '__STATIC__/images/icon_03.png':$user.head_pic}"/>
+        </div>
+        <div class="user_top_name">
+            <a href="javascript:void(0);">{$user.nickname == ''? '王先生':$user.nickname}</a>
+        </div>
+        <div class="user_top_name">
+            <a href="javascript:void(0);" style="font-size: 0.5rem;font-weight: 100;color: #666666;">上级推荐码{$user.nickname ==
+                ''? '688699':$user.nickname}</a>
+        </div>
+        <div class="user_top_title">
+            <a href="javascript:void(0);"></a>
+        </div>
+    </div>
+    <div class="z_user_down">
+        <div class="user_down_bg"></div>
+        <ul>
+            <li>
+                <a href="{:U('Mobile/User/account')}">
+                    <div class="user_down_dev" style="color: #FFB638">{$user.user_money}</div>
+                    <div class="user_down_name">销售额</div>
+                </a>
+            </li>
+            <li>
+                <a href="{:U('Mobile/User/points_list')}">
+                    <div class="user_down_dev" style="color: #4791FF">{$user.user_money}</div>
+                    <div class="user_down_name">本月利润</div>
+                </a>
+            </li>
+            <li>
+                <a href="{:U('Mobile/User/points_list')}">
+                    <div class="user_down_dev" style="color: #FF5438">{$user.user_money}</div>
+                    <div class="user_down_name">订单数</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="z_user_icon">
+        <a href="/Mobile/User/userinfo.html">
+            <i></i>
+        </a>
+    </div>
+</div>
+
+
+<!--菜单-start-->
+<div class="floor dh">
+    <nav>
+        <a href="{:U('Order/order_list')}">
+            <img src="__STATIC__/images/system/allorder.png"/><br/>
+            <span>全部订单</span>
+        </a>
+        <a href="{:U('Order/order_list',array('type'=>'WAITPAY'))}">
+
+            <img src="__STATIC__/images/system/waitpay.png"/><br/>
+            <span>待付款</span>
+        </a>
+        <!--<a href="shopcar.html">-->
+        <a href="{:U('Order/order_list',array('type'=>'WAITSEND'))}">
+            <img src="__STATIC__/images/system/waitsend.png"/><br/>
+            <span>待发货</span>
+
+        </a>
+        <a href="{:U('Order/wait_receive',array('type'=>'WAITRECEIVE'))}">
+
+            <img src="__STATIC__/images/system/waitsave.png"/><br/>
+            <span>待收货</span>
+
+        </a>
+        <div class="mybutton">立即下单</div>
+        <a href="{:U('Activity/group_list')}">
+
+            <img src="__STATIC__/images/system/sendset.png"/><br/>
+            <span>发货人设置</span>
+
+        </a>
+        <a href="{:U('User/address_list')}">
+
+            <img src="__STATIC__/images/system/saveset.png"/><br/>
+            <span>收货人设置</span>
+
+        </a>
+        <a href="{:U('Goods/integralMall')}">
+
+            <img src="__STATIC__/images/system/start.png"/><br/>
+            <span>收藏商品</span>
+
+        </a>
+        <!--<a href="my.html">-->
+        <a href="javascript:void(0);" onclick="alert('请购买高级版支持哦!');">
+
+            <img src="__STATIC__/images/system/contant.png"/><br/>
+            <span>联系客服</span>
+
+        </a>
+    </nav>
+</div>
+<!--菜单-end-->
+
+<!--秒杀-start-->
+
+<div style="background: #fff;height: 1.5rem;">
+    <div class="tip"></div>
+    <div style="height:100%;line-height: 1.6rem;font-size: .64rem;font-weight: 600;padding-left: .427rem; display:inline-block;">
+        促销活动
+    </div>
+    <div style="float: right;height:100%;line-height: 1.6rem;font-size: .54rem;font-weight: 600;padding-right: .427rem; ">
+        <a href="{:U('Mobile/Activity/flash_sale_list')}" style="color: #FFC153">
+            查看更多
+        </a>
+    </div>
+</div>
+
+<!--秒杀-end-->
+<div class="goods-parameter">
+    <div class="merit">
+        <img style="width:100%;height:100%;border-radius: 0.4rem;" src="__STATIC__/images/system/test.jpg"/>
+    </div>
+    <div class="merit">
+        <img style="width:100%;height:100%;border-radius: 0.4rem;" src="__STATIC__/images/system/test.jpg"/>
+    </div>
+    <div class="merit">
+        <img style="width:100%;height:100%;border-radius: 0.4rem;" src="__STATIC__/images/system/test.jpg"/>
+    </div>
+    <div class="merit">
+        <img style="width:100%;height:100%;border-radius: 0.4rem;" src="__STATIC__/images/system/test.jpg"/>
+    </div>
+    <div class="merit">
+        <img style="width:100%;height:100%;border-radius: 0.4rem;" src="__STATIC__/images/system/test.jpg"/>
+    </div>
+</div>
+<div style="background: #fff;height: 1.5rem;margin-top: 0.3rem">
+    <div class="tip"></div>
+    <div style="height:100%;line-height: 1.6rem;font-size: .64rem;font-weight: 600;padding-left: .427rem; display:inline-block;">
+        大家都在屯
+    </div>
+
+</div>
+<div class="goods">
+    <div class="goods-list" ref="goodsList">
+        <div class="goods-details">
+            <div style="width: 6rem;height: 100%;text-align: center;line-height: 4.5rem">
+                <img src="__STATIC__/images/system/download.jpg" alt="商品"/>
+            </div>
+            <div class="goods-info">
+                <h3> 668,699,699668,699,699668,699,699668,699,699668,699,699668,699,699668,699,699 </h3>
+                <span>利润  668,999,999 </span>
+                <span style="color:#FFB58D;border:1pt #FFB58D solid;margin-left:10pt">利润率  668,699,999 </span>
+                <p style="margin-top:0.3rem">
+                    采购金额
+                    <strong style="color:#6490FF;font-size:0.6rem"> 668,699,699 </strong> 日元/件
+                </p>
+                <p>
+                    销售金额
+                    <strong style="color:#FFB764;font-size:0.6rem"> 668,699,699 </strong> 日元/件
+                </p>
+
+                <!-- <van-icon name="shopping-cart" /> -->
+                <div>
+                    <img style="width:100%;height:100%" src="__STATIC__/images/system/shop.png"/>
+                </div>
+                <div style="right: 1.4rem;">
+                    <img style="width:100%;height:100%" src="__STATIC__/images/system/like.png"/>
+                </div>
+            </div>
+        </div>
+        <div class="goods-details">
+            <div style="width: 6rem;height: 100%;text-align: center;line-height: 4.5rem">
+                <img src="__STATIC__/images/system/download.jpg" alt="商品"/>
+            </div>
+            <div class="goods-info">
+                <h3> 668,699,699668,699,699668,699,699668,699,699668,699,699668,699,699668,699,699 </h3>
+                <span>利润  668,999,999 </span>
+                <span style="color:#FFB58D;border:1pt #FFB58D solid;margin-left:10pt">利润率  668,699,999 </span>
+                <p style="margin-top:0.3rem">
+                    采购金额
+                    <strong style="color:#6490FF;font-size:0.6rem"> 668,699,699 </strong> 日元/件
+                </p>
+                <p>
+                    销售金额
+                    <strong style="color:#FFB764;font-size:0.6rem"> 668,699,699 </strong> 日元/件
+                </p>
+
+                <!-- <van-icon name="shopping-cart" /> -->
+                <div>
+                    <img style="width:100%;height:100%" src="__STATIC__/images/system/shop.png"/>
+                </div>
+                <div style="right: 1.4rem;">
+                    <img style="width:100%;height:100%" src="__STATIC__/images/system/like.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="f-classify">-->
+<!--    <ul>-->
+<!--        <li>-->
+<!--            <adv limit="1" item="v" pid="507">&lt;!&ndash; 中间广告图-左图1 &ndash;&gt;-->
+<!--                <if condition="$_GET['edit_ad']  eq 1">-->
+<!--                    <a href="{$v.ad_link}">-->
+<!--                        <else>-->
+<!--                            <a href="{$v.ad_link|get_bd_url=$v.media_type}">-->
+<!--                </if>-->
+
+<!--                <img src="{$v[ad_code]}" title="{$v[title]}"/>-->
+<!--                </a>-->
+<!--            </adv>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <adv limit="1" item="v" pid="508">&lt;!&ndash; 中间广告图-左图2 &ndash;&gt;-->
+<!--                <if condition="$_GET['edit_ad']  eq 1">-->
+<!--                    <a href="{$v.ad_link}">-->
+<!--                        <else>-->
+<!--                            <a href="{$v.ad_link|get_bd_url=$v.media_type}">-->
+<!--                </if>-->
+<!--                <img src="{$v[ad_code]}" title="{$v[title]}"/>-->
+<!--                </a>-->
+<!--            </adv>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <adv limit="1" item="v" pid="509">&lt;!&ndash; 中间广告图-右图1 &ndash;&gt;-->
+<!--                <if condition="$_GET['edit_ad']  eq 1">-->
+<!--                    <a href="{$v.ad_link}">-->
+<!--                        <else>-->
+<!--                            <a href="{$v.ad_link|get_bd_url=$v.media_type}">-->
+<!--                </if>-->
+<!--                <img src="{$v[ad_code]}" title="{$v[title]}"/>-->
+<!--                </a>-->
+<!--            </adv>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <adv limit="1" item="v" pid="510">&lt;!&ndash; 中间广告图-右图2 &ndash;&gt;-->
+<!--                <if condition="$_GET['edit_ad']  eq 1">-->
+<!--                    <a href="{$v.ad_link}">-->
+<!--                        <else>-->
+<!--                            <a href="{$v.ad_link|get_bd_url=$v.media_type}">-->
+<!--                </if>-->
+<!--                <img class="pos-smallad4" src="{$v[ad_code]}" title="{$v[title]}"/>-->
+<!--                </a>-->
+<!--            </adv>-->
+<!--        </li>-->
+<!--    </ul>-->
+
+
+<!--</div>-->
+<!--<div class="h-showcase">-->
+<!--    <adv limit="1" item="v" pid="506">-->
+<!--        <if condition="$_GET['edit_ad']  eq 1">-->
+<!--            <a href="{$v.ad_link}">-->
+<!--                <else>-->
+<!--                    <a href="{$v.ad_link|get_bd_url=$v.media_type}">-->
+<!--        </if>-->
+<!--        <img src="{$v[ad_code]}" title="{$v[title]}"/>-->
+<!--        </a>-->
+<!--    </adv>-->
+<!--</div>-->
+<!--<div onclick=""></div>-->
+<!--热销商品-start-->
+<!--<div class="floor newshop">-->
+<!--    <div class="banner banner_imgs">-->
+<!--        <img src="__STATIC__/images/h-rxsp.png" alt="热销商品"/>-->
+<!--    </div>-->
+<!--    <div class="rxsp-list" id="J_ItemList">-->
+<!--        <ul>-->
+
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
+<!--热销商品-end-->
+<!--推荐商品-start-->
+<!--<if condition="$recommend_goods"></if>-->
+<!--<div class="floor hotshop index_hot">-->
+<!--    <div class="banner banner_imgs ">-->
+<!--        <img src="__STATIC__/images/h-tstj.png" alt="推荐商品"/>-->
+<!--    </div>-->
+<!--    <div class="f-recommend">-->
+<!--        <ul>-->
+<!--            <foreach name="recommend_goods" item="v">-->
+<!--                <li>-->
+<!--                    <a href="{:U('mobile/goods/goodsInfo',array('id'=>$v.goods_id))}">-->
+<!--                        <img src="{$v.goods_id|goods_thum_images=300,300}" alt="{$v.goods_name}" style="height: 100%">-->
+<!--                        <div class="fr-pdetail">-->
+<!--                            <p class="frp-title">{$v.goods_name}</p>-->
+<!--                            <if condition="$v.label_id">-->
+<!--                                <span class="frp-label">{$v.label_id}</span>-->
+<!--                                <else>-->
+<!--                                    <span class="frp-label" style="border:none"></span>-->
+<!--                            </if>-->
+<!--                            <div class="frp-price"><span class="ro-sm">￥</span><span class="ro-price">{$v.shop_price|explode_price=0}</span><span-->
+<!--                                    class="ro-sm">.{$v.shop_price|explode_price=1}</span></div>-->
+<!--                            <div class="wo-msg">-->
+<!--                                <span>已售{$v.sales_sum}件</span>-->
+<!--                                <span>{$v.comment_statistics['high_rate']}%好评</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--            </foreach>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</if>-->
+<!--推荐商品-end-->
+
+<!--拼团列表-start-->
+<!--<if condition="$team_activity">-->
+<!--    <div class="floor guesslike m-b-0">-->
+<!--        <div class="banner banner_imgs ">-->
+<!--            <img src="__STATIC__/images/h-ptlbzs.png" alt="拼团列表"/>-->
+<!--        </div>-->
+<!--        <div class="vir" style="width: 0.683rem"></div>-->
+<!--        <div class="pt-group f-recommend">-->
+<!--            <ul>-->
+<!--                <foreach name="team_activity" item="v">-->
+<!--                    <li>-->
+<!--                        <a href="{$v.bd_url}">-->
+<!--                            <div class="content_img">-->
+<!--                                <img src="{$v.goods_id|goods_thum_images=300,300}" alt="{$v.goods_name}"-->
+<!--                                     style="width: 100%">-->
+<!--                            </div>-->
+<!--                            <p class="rxsp-title">{$v.goods_name}</p>-->
+<!--                            <span class="rx-sp">{$v.team_type_desc}</span>-->
+<!--                            <span class="rx-sp">{$v.needer}人团</span>-->
+<!--                            <span class="hd-img">-->
+<!--                                        <foreach name="$v.follow_users_head_pic" item="p">-->
+<!--                                            <span><img src="{$p.follow_user_head_pic}" alt=""-->
+<!--                                                       style="width: 0.768rem;height: 0.768rem"></span>-->
+<!--                                        </foreach>-->
+<!--                                </span>-->
+<!--                            <div class="rxsp-price">-->
+<!--                                <span class="ro-sm">￥</span><span class="ro-price">{$v.team_goods_item[0]['team_price']|explode_price=0}</span><span-->
+<!--                                    class="ro-sm">.{$v.team_goods_item[0]['team_price']|explode_price=1}</span>-->
+<!--                                <span class="has-sold">已拼{$v.virtual_sale_num}件</span>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </foreach>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</if>-->
+
+
+<div class="jz-loods get_more">
+    <span class="loading"><img src="__STATIC__/images/loading2.gif" alt=""></span>
+    <span>商品加载中...</span>
+    <!--<em>商品加载完毕...</em>-->
+</div>
+<div class="c-line">
+    <p>已显示完该类商品</p>
+</div>
+</div>
+<!--猜您喜欢-end-->
+<include file="public/wx_share"/>
+<!--底部-start-->
+
+<!--底部-end-->
+
+<!--底部导航-start-->
+<include file="public/footer_nav"/>
+<!--底部导航-end-->
+<script src="__STATIC__/js/style.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/js/sourch_submit.js"></script>
+<script type="text/javascript">
+    $(function () {
+//        加载热销商品信息
+        ajax_sourch_submit();
+    })
+    $('.hd-img').children('span').each(function () {
+        console.log($(this).index())
+        $(this).css('right', $(this).index() * $('.vir').width())
+    })
+
+    /**
+     * 秒杀模块倒计时
+     * */
+    function GetRTime(end_time) {
+        var NowTime = new Date();
+        var t = (end_time * 1000) - NowTime.getTime();
+        // var d = Math.floor(t/1000/60/60/24);
+        var h = Math.floor(t / 1000 / 60 / 60 % 24) < 10 ? '0' + Math.floor(t / 1000 / 60 / 60 % 24) : Math.floor(t / 1000 / 60 / 60 % 24);
+        var m = Math.floor(t / 1000 / 60 % 60) < 10 ? '0' + Math.floor(t / 1000 / 60 % 60) : Math.floor(t / 1000 / 60 % 60);
+        var s = Math.floor(t / 1000 % 60) < 10 ? '0' + Math.floor(t / 1000 % 60) : Math.floor(t / 1000 % 60);
+        if (s >= 0)
+            return h + ':' + m + ':' + s + '';
+    }
+
+    function GetRTime2() {
+        var text = GetRTime('{$end_time}');
+        if (text == 0) {
+            $(".hms").text('活动已结束');
+        } else {
+            $(".hms").text(text);
+        }
+    }
+
+    setInterval(GetRTime2, 1000);
+
+    /**
+     * 继续加载猜您喜欢
+     * */
+    var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+    var page = 0;
+
+    function ajax_sourch_submit() {
+        if (before_request == 0)// 上一次请求没回来 不进行下一次请求
+            return false;
+        before_request = 0;
+        page++;
+        $.ajax({
+            type: "get",
+            url: "/index.php?m=Mobile&c=Index&a=ajaxGetMore&p=" + page,
+            success: function (data) {
+                if (data) {
+                    $("#J_ItemList>ul").append(data);
+                    before_request = 1;
+                } else {
+                    $('.get_more').hide();
+                    $('.c-line').show()
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

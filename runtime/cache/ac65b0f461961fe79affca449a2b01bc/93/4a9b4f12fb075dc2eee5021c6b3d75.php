@@ -1,0 +1,4 @@
+<?php
+//000000007200
+ exit();?>
+[{"goods_id":14,"goods_name":"\u6234\u5c14(DELL)\u7075\u8d8aAIO 23.8\u82f1\u5bf8IPS\u7a84\u8fb9\u6846\u4e00\u4f53\u673a\u53f0\u5f0f\u7535\u8111(A6-9225 4G 1T \u4e09\u5e74\u4e0a\u95e8 \u65e0\u7ebf\u952e\u9f20 \u767d)","shop_price":"3699.00"},{"goods_id":276,"goods_name":"\u8054\u60f3\u4e00\u4f53\u673a\u53f0\u5f0f\u673a\u7535\u8111AIO520 \u8054\u60f324\u5bf8 27\u5bf8\u5bb6\u7528\u5546\u7528\u8d85\u8584\u4e00\u4f53\u673a ","shop_price":"6890.00"},{"goods_id":278,"goods_name":"\u8054\u60f3\u7535\u8111\u4e00\u4f53\u673a21.5\u5bf8i5-4210U\u56db\u6838\u72ec\u663eWiFi\u7535\u8111\u5bb6\u7528\u53f0\u5f0f\u6574\u673a\u5168\u5957 ","shop_price":"1890.00"},{"goods_id":279,"goods_name":"\u8054\u60f3AIO 520C-24 8\u4ee3i3-8100T 23.8\u5bf8IPS\u5c4f\u5546\u52a1\u53f0\u5f0f\u4e00\u4f53\u673a\u7535\u8111 ","shop_price":"4568.00"}]

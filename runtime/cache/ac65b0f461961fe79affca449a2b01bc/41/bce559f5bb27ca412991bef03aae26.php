@@ -1,0 +1,4 @@
+<?php
+//000031104000
+ exit();?>
+[{"level_id":2,"level_name":"\u5014\u5f3a\u9752\u94dc","amount":"0.00","discount":100,"describe":"\u82e5\u5982\u521d\u76f8\u89c1\uff0c\u82e5\u5982\u521d\u76f8\u604b","type":0},{"level_id":3,"level_name":"\u79e9\u5e8f\u767d\u94f6","amount":"1000.00","discount":99,"describe":"","type":0},{"level_id":4,"level_name":"\u8363\u8000\u9ec4\u91d1","amount":"3000.00","discount":94,"describe":"","type":0},{"level_id":5,"level_name":"\u5c0a\u8d35\u94c2\u91d1","amount":"10000.00","discount":95,"describe":"","type":0},{"level_id":6,"level_name":"\u6c38\u6052\u94bb\u77f3","amount":"50000.00","discount":93,"describe":"","type":0},{"level_id":7,"level_name":"\u81f3\u5c0a\u661f\u8000","amount":"100000.00","discount":91,"describe":"","type":0},{"level_id":8,"level_name":"\u6700\u5f3a\u738b\u8005","amount":"3000000.00","discount":90,"describe":"","type":0}]
